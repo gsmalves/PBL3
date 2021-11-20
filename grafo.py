@@ -18,9 +18,16 @@ def gerar_caminhos(grafo, caminho, final):
         # pela linha "yield from gerar_caminhos(grafo, caminho + [vizinho], final)"
         for caminho_maior in gerar_caminhos(grafo, caminho + [vizinho], final):
             yield caminho_maior
+# Basicamente o yield cria um generator com base no que retornaria de uma função
+# Devemos utilizar o yield ou o generator quando há uma lista muito grande que 
+# queremos lidar, para não termos que salvar esta na memória
+
+
 
 # Exemplo de uso
-G = {'A': ['B', 'C'], 'B': ['A', 'C', 'D'], 'C': ['A', 'B', 'D'], 'D': ['B', 'C']}
+G = {'Salvador': ['Belo Horizonte', 'Aracaju'], 'Belo Horizonte': ['Salvador', 'Aracaju', 'São Paulo'], 'Aracaju': ['Salvador', 'Belo Horizonte', 'São Paulo'], 'São Paulo': ['Belo Horizonte', 'Aracaju']}
 
-for caminho in gerar_caminhos(G, ['A'], 'D'):
+# origem = input("Digite a cidade de origem:")
+# destino= input("Cidade de destino:")
+for caminho in gerar_caminhos(G, ['Salvador'], 'São Paulo'):
     print (caminho)
