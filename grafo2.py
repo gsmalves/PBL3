@@ -1,4 +1,7 @@
-G =  {'Salvador': ['Belo Horizonte', 'Aracaju'], 'Belo Horizonte': ['Salvador', 'Aracaju', 'São Paulo'], 'Aracaju': ['Salvador', 'Belo Horizonte', 'São Paulo'], 'São Paulo': ['Belo Horizonte', 'Aracaju']}
+G =  {'Salvador': ['Belo Horizonte', 'Aracaju'], 
+'Belo Horizonte': ['Salvador', 'Aracaju', 'São Paulo'],
+ 'Aracaju': ['Salvador', 'Belo Horizonte', 'São Paulo'], 
+ 'São Paulo': ['Belo Horizonte', 'Aracaju']}
 
 
 def dfs_caminhos(grafo, inicio, fim):
