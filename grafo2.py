@@ -2,10 +2,13 @@ G =  {'Salvador': ['Belo Horizonte', 'Aracaju'], 'Belo Horizonte': ['Salvador', 
 
 
 def dfs_caminhos(grafo, inicio, fim):
+    #Insere o primeiro nó na pilha
     pilha = [(inicio, [inicio])]
     while pilha:
         vertice, caminho = pilha.pop()
+        #Empilha os vizinhos não visitados
         for proximo in set(grafo[vertice]) - set(caminho):
+            #Chegando no destivo, retorna os caminhos
             if proximo == fim:
                 yield caminho + [proximo]
             else:
