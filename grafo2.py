@@ -6,12 +6,13 @@ def dfs_caminhos(grafo, inicio, fim):
     pilha = [(inicio, [inicio])]
     while pilha:
         vertice, caminho = pilha.pop()
-        #Empilha os vizinhos não visitados
+        #Passa pelos vértices não visitados
         for proximo in set(grafo[vertice]) - set(caminho):
-            #Chegando no destivo, retorna os caminhos
+            #Chegando no destino, retorna os caminhos
             if proximo == fim:
                 yield caminho + [proximo]
             else:
+                #Empilha os vértices não visitados
                 pilha.append((proximo, caminho + [proximo]))
 
 # caminhos = list(dfs_caminhos(G, 'Salvador', 'São Paulo'))
