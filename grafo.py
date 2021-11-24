@@ -8,7 +8,6 @@ def gerar_caminhos(grafo, caminho, final):
     if caminho[-1] == final:
         yield caminho
     
-
     # Procuramos todos os vértices para os quais podemos avançar…
     for vizinho in G[caminho[-1]]:
         # …mas não podemos visitar um vértice que já está no caminho.
