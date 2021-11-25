@@ -22,17 +22,21 @@ class Processos():
             j.set_id_coordenador(id_called)      
 
     def printt(self):
-        print("Coordenador {} Processo {} Ativo {}".format(self.id_coordenador, self.id_processo, self.ativo))
+        print("Coordenador {}   | Processo {}| Ativo {}|".format(self.id_coordenador, self.id_processo, self.ativo))
 
+    #Função que desativa o coordenador atual, parando de responder para uma nova eleição
     def desativar(self):
         if (self.ativo):
             self.ativo = False
         else:
             self.ativo = True
-        print("\nEstado do processo id {}, estado {}\n".format(self.id_processo, self.ativo))
+        print("\nCoordenador do processo {} parou de responder - Estado {}\n".format(self.id_processo, self.ativo))
 
+    #Função que analisa se o processo que pediu a eleição está ativo e se tem algum outro 
+    # com prioridade maior que ele, caso tenha, ele sai da eleição
     def eleicao(self):
         for i in processos:
+            #Prioridade é de acordo com o id do processo
             if (i.get_id_process() > self.id_processo):
                 if (i.get_active()):
                     print("Processo {} saiu da eleição ".format(self.id_processo))
@@ -51,20 +55,22 @@ while(count <= numero_de_processos):
     process = Processos(numero_de_processos  , count )
     processos.append(process)
     count += 1
-print("\nCoordenador atual, processos, se esta ativo \n")
+print("\nCoordenador atual| processos| se esta ativo")
 for l in processos:
     
     l.printt()
 
 processos[len(processos)-1].desativar()
+print("__________________________________________ \n")
 
 print("\nProcessos que não podem concorrer \n ")
 for k in processos:
     if k.get_id_process() == processo_eleicao:
         k.eleicao()
         break
+print("__________________________________________ \n")
 
-print("Novo coordenador, processos, se esta ativo \n")
+print("Novo coordenador| processos |se esta ativo")
 
 for h in processos:
     
