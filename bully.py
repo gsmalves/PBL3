@@ -1,8 +1,8 @@
-import zmq
-import time
-import parse
-import sys
-import threading
+import zmq, threading, time, parse, sys
+from models.grafo import G
+trechos = {
+
+}
 
 class Bully:
     def __init__(self, proc_ip, proc_port, proc_port2, id):
@@ -113,8 +113,19 @@ class Bully:
 
         client_thread = threading.Thread(target=self.run_client, args=[])
         client_thread.start()
+    
+    def arraysTrechos(self, grafo):
+        conf_file = open("origens.txt","r", encoding="utf8")
+        input = conf_file.read().split('\n')
+        n = int(input[0])
+        for i in range(1,n+1):
+            dataList = G[input[i]]
+            for index in range(len(dataList)):
+                trechos[input[i]+"-"+dataList[index]['cidade']] = []                
+        print(trechos)
 
 ip, port1, port2, id = str(sys.argv[1]), str(sys.argv[2]), str(sys.argv[3]), int(sys.argv[4])
 
 bully = Bully(ip, port1, port2, id)
+bully.arraysTrechos(G)
 bully.run()
