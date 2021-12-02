@@ -1,4 +1,9 @@
-class Voo:
+import dfs
+from models.grafo import G
+
+rotas = []
+
+class EmpresaA:
     def __init__(self):
         self.processos = 3
         self.relogio = [[0] for self.i in range(self.processos)]
@@ -39,5 +44,67 @@ class Voo:
         aux[1] = eventoEmpresaB[len(eventoEmpresaB) - 1]
         eventoEmpresaC = self.evento(0, 2)
         aux[2] = eventoEmpresaC[len(eventoEmpresaC) - 1]
+
+        return aux
+
+    def buscarRotas(self, origem, destino):
+        caminhos = list(dfs.dfs_caminhos(G, origem, destino))
+
+        for x in caminhos:
+            x.append(self.tempoTotal(x))
+            self.add_infos(x)
+
+        caminhos = self.remove(caminhos)
+        return caminhos
+    
+    def tempoTotal(self, caminhos):
+        i = 0
+        for x in range(len(caminhos) - 1):
+            i = i + self.soma(caminhos[x], caminhos[x + 1])
+
+        return i
+
+    def add_infos(self, caminhos):
+        i = ''
+        for x in range(len(caminhos) - 2):
+            i = self.aux_2(caminhos[x], caminhos[x + 1])
+            caminhos.append(i)
+
+        return i
+    
+    def aux_2(self, ini, fim):
+        tempo = ''
+        for x in G[ini]:
+            if x['cidade'] == fim:
+                tempo = x['empresa'] + str(x['numero']) + '|' + str(x['bilhetes'])
+
+        return tempo
+    
+    def soma(self, ini, fim):
+        tempo = 0
+        for x in G[ini]:
+            if x['cidade'] == fim:
+                tempo = x['tempo']
+
+        return tempo
+
+    def remove(self, caminhos):
+
+        aux = self.busca_bilhete(caminhos)
+
+        for x in aux:
+            caminhos.remove(x)
+
+
+        return caminhos
+
+    def busca_bilhete(self, caminhos):
+
+        aux = []
+        for x in range(len(caminhos)):
+            for y in range(len(caminhos[x])):
+                    if type(caminhos[x][y]) != int:
+                         if len(caminhos[x][y].split('|')) == 2 and int(caminhos[x][y].split('|')[1]) == 0:
+                            aux.append(caminhos[x])
 
         return aux

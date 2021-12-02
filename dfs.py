@@ -1,6 +1,6 @@
-from models.grafo import G
 
-def buscarRotas(grafo, inicio, fim):
+
+def dfs_caminhos(grafo, inicio, fim):
     # Insere o primeiro nó na pilha
     pilha = [(inicio, [inicio])]
     while pilha:
