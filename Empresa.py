@@ -1,4 +1,4 @@
-import dfs
+import dfs, time
 from models.grafo import G
 
 rotas = []
@@ -47,7 +47,79 @@ class EmpresaA:
 
         return aux
 
-    def buscarRotas(self, origem, destino):
+    def aux_3(self, inicio, fim):
+
+        for x in G[inicio]:
+            if x['cidade'] == fim:
+                x['bilhetes'] = x['bilhetes'] - 1
+    
+    def fazerCompra_bilhete(self, rota, fim):
+        try:
+            self.fazerCompra_bilhete2(rota, fim)
+        except:
+            print('Erro ao conectar ao servidor B')
+        if len(self.busca_bilhete_2(rota)) == 0:
+            for x in range(len(rota)):
+                if rota[x] == fim:
+                    break
+
+                self.aux_3(rota[x], rota[x + 1])
+
+
+            for x in self.buscarEmp(rota, fim):
+                if x == 'A':
+                    relogio = self.relogio_lamport()
+
+            aux = {'rota': rota,'relogio': relogio}
+
+
+            self.compradores.append(aux)
+            print(self.compradores)
+
+            return True
+
+        return False
+    
+    def fazerCompra_bilhete2(self, rota, fim):
+        if len(self.busca_bilhete_2(rota)) == 0:
+            for x in range(len(rota)):
+                if rota[x] == fim:
+                    break
+                self.aux_3(rota[x], rota[x + 1])
+
+            for x in self.buscarEmp(rota, fim):
+                if x == 'A':
+                    relogio = self.relogio_lamport()
+    
+    def busca_bilhete_2(self, rota):
+        aux = []
+        for x in range(len(rota)):
+                if type(rota[x]) != int:
+                    if len(rota[x].split('|')) == 2 and int(rota[x].split('|')[1]) == 0:
+                        aux.append(rota[x])
+
+        return aux
+    
+    def buscarEmp(self, caminhos, fim):
+        listEmp = []
+
+        for x in range(len(caminhos) - 2):
+            i = self.auxEmp(caminhos[x], caminhos[x + 1])
+            listEmp.append(i)
+            if caminhos[x] == fim:
+                break
+
+        return listEmp
+    
+    def auxEmp(self, ini, fim):
+        tempo = ''
+        for x in G[ini]:
+            if x['cidade'] == fim:
+                tempo = x['empresa']
+
+        return tempo
+
+    def buscarRotas(self, origem, destino) -> list:
         caminhos = list(dfs.dfs_caminhos(G, origem, destino))
 
         for x in caminhos:
@@ -89,13 +161,10 @@ class EmpresaA:
         return tempo
 
     def remove(self, caminhos):
-
         aux = self.busca_bilhete(caminhos)
-
         for x in aux:
             caminhos.remove(x)
-
-
+        time.sleep(0.2)
         return caminhos
 
     def busca_bilhete(self, caminhos):

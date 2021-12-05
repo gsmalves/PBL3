@@ -1,14 +1,16 @@
-import dfs
-from models.grafo import G
+   
+from flask import Flask, request, jsonify
+import os
 
-rotas = []
+app = Flask(__name__)
 
-origem = input("Digite a cidade de origem:")
-destino = input("Cidade de destino:")
-cont = 0
-for caminho in dfs.buscarRotas(G, origem, destino):
-    rotas.append(caminho)
-    print('{} {}'.format(cont, caminho))
-    cont+=1
-escolha = input("Trecho escolhido:")
+@app.route('/', methods=['GET'])
+def raiz():
+    return jsonify({'status': 'Sucess'}), 200
 
+
+
+
+
+port = int(os.environ.get("PORT", 5000))
+app.run(debug=True ,host='0.0.0.0', port=port)
