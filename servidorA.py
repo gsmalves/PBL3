@@ -1,17 +1,16 @@
 from EmpresaA import EmpresaA
-   
 from flask import Flask, jsonify, json
-import os
 
 app = Flask(__name__)
 
-@app.route('/empresaA/', methods=['GET'])
+@app.route('/empresaA', methods=['GET'])
 def raiz():
     ret = mostrarRotasA()
-    return jsonify(ret), 200
+    return jsonify(json.loads(ret)), 200
 
-@app.route('/empresaA/', methods=['POST'])
-def compra(passagem):
+@app.route('/empresaA/<string:passagem>', methods=['POST'])
+def compra(passagem: str):
+    print(passagem)
     comprar(passagem)
 
 
@@ -21,7 +20,7 @@ def mostrarRotasA()->dict:
 
 def comprar(passagem):
     empresaA = EmpresaA()
-    ret = empresaA.fazerCompra_bilhete(list[int(passagem)], "Porto Alegre")
+    ret = empresaA.fazerCompra_bilhete(passagem, "Porto Alegre")
     if ret == True:
         return("Compra Realizada")
     else:

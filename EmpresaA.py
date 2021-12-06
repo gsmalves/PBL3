@@ -81,6 +81,7 @@ class EmpresaA:
         return False
     
     def fazerCompra_bilhete2(self, rota, fim):
+        print(rota)
         if len(self.busca_bilhete_2(rota)) == 0:
             for x in range(len(rota)):
                 if rota[x] == fim:
