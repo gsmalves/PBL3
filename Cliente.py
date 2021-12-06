@@ -1,40 +1,17 @@
-from Empresa import EmpresaA
-
-
-
-def mostrarRotas():
-    empresaA = EmpresaA()
-    
-    print('Servidor A conectado!')
-    cont = 0
-    list = empresaA.buscarRotas('Salvador', 'Porto Alegre')
-    for x in list:
-        print(str(cont) +" - "+ str(x))
-        cont = cont + 1
-    passagem = input("Digite a rota escolhida:")
-    ret = empresaA.fazerCompra_bilhete(list[int(passagem)], "Porto Alegre")
-    if ret == True:
-            print("Compra Realizada")
-    else:
-        print("Não foi possível relizar a compra")
-
-    mostrarRotas()
-
-    try:
-        print('Servidor B conectado!')
-        # print(empresaA.buscarRotas('Salvador', 'Porto Alegre'))
-    except:
-        print('Erro ao conectar ao servidor B')
-
-    try:
-        print('Servidor C conectado!')
-        # print(empresaA.buscarRotas('Salvador', 'Porto Alegre'))
-    except:
-        print('Erro ao conectar ao servidor C')
-
-
-    
-
+import requests, json
 
 if __name__ == "__main__":
-    mostrarRotas()
+    empresa = input("Digite a empresa escolhida:")
+    if(empresa =="A"):
+        cont = 0
+        list = json.dumps(requests.get(url=f'http://localhost:5000/empresaA'), ensure_ascii=False)
+        for x in list:
+            print(str(cont) +" - "+ str(x))
+            cont = cont + 1
+        passagem = input("Digite a rota escolhida:")
+        requests.post(url=f'http://localhost:5000/empresaA', json=passagem)
+
+
+
+    else:
+        requests.get(url=f'http://localhost:5001/empresaB')

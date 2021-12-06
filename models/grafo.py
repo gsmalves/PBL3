@@ -20,6 +20,6 @@ G = {
     'Recife': [{'cidade': 'Salvador', 'tempo': 2, 'empresa': 'C', 'numero': 1999, 'bilhetes': 10},
                {'cidade': 'Rio de Janeiro', 'tempo': 4, 'empresa': 'C', 'numero': 1980, 'bilhetes': 10}],
     'Salvador': [{'cidade': 'Belém', 'tempo': 1, 'empresa': 'A', 'numero': 1990, 'bilhetes': 10},
-                 {'cidade': 'Porto Alegre', 'tempo': 2, 'empresa': 'B', 'numero': 1991, 'bilhetes': 10}],
+                 {'cidade': 'Porto Alegre', 'tempo': 2, 'empresa': 'B', 'numero': 1991, 'bilhetes': 1}],
     'Rio de Janeiro': [{'cidade': 'São Paulo', 'tempo': 1, 'empresa': 'C', 'numero': 1986, 'bilhetes': 10},
                        {'cidade': 'Recife', 'tempo': 4, 'empresa': 'A', 'numero': 1981, 'bilhetes': 10}]}
