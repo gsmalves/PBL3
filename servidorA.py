@@ -23,7 +23,8 @@ def raiz():
         origem = request.form['origem']
         destino = request.form['destino']
         ret = mostrarRotasA(origem, destino)
-        return jsonify(json.loads(ret)), 200
+        print(ret)
+        return render_template('search.html', value = ret, response=200)
 
 @app.route('/empresaA/<string:passagem>', methods=['POST'])
 def compra(passagem: str):

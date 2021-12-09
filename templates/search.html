@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rota</th>
+                <th>Tempo</th>
+                <th>Passagens</th>
+            <tr>
+        </thead>
+        <tbody>
+            {% for p in value %}
+            <tr>
+                {% for cidade in p.rota %}
+                <td>teste</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
