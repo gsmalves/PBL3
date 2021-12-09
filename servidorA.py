@@ -1,12 +1,29 @@
 from EmpresaA import EmpresaA
-from flask import Flask, jsonify, json
+from flask import Flask, jsonify, render_template, redirect, url_for, session, request
+import json
 
 app = Flask(__name__)
+    
 
-@app.route('/empresaA', methods=['GET'])
+@app.route('/empresaA/entrar', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    else:
+        name = request.form['name']
+        passw = request.form['password']
+        return redirect(url_for('raiz'))
+            
+
+@app.route('/empresaA', methods=['GET', 'POST'])
 def raiz():
-    ret = mostrarRotasA()
-    return jsonify(json.loads(ret)), 200
+    if request.method == 'GET':
+        return render_template('home.html')
+    else:
+        origem = request.form['origem']
+        destino = request.form['destino']
+        ret = mostrarRotasA(origem, destino)
+        return jsonify(json.loads(ret)), 200
 
 @app.route('/empresaA/<string:passagem>', methods=['POST'])
 def compra(passagem: str):
@@ -14,9 +31,9 @@ def compra(passagem: str):
     comprar(passagem)
 
 
-def mostrarRotasA()->dict:
+def mostrarRotasA(origem, destino)->dict:
     empresaA = EmpresaA()
-    return json.dumps(empresaA.buscarRotas('Salvador', 'Porto Alegre'), ensure_ascii=False)
+    return json.dumps(empresaA.buscarRotas(origem, destino), ensure_ascii=False)
 
 def comprar(passagem):
     empresaA = EmpresaA()
