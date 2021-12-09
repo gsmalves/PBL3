@@ -23,8 +23,14 @@ def raiz():
         origem = request.form['origem']
         destino = request.form['destino']
         ret = mostrarRotasA(origem, destino)
-        print(ret)
-        return render_template('search.html', value = ret, response=200)
+        rota = ''
+        resp = ret
+        for x in ret:
+            rota = ''
+            for i in x['rota']:
+                rota = rota +"->"+ i
+            x['rota'] = rota
+        return render_template('search.html', value = ret, v = resp)
 
 @app.route('/empresaA/<string:passagem>', methods=['POST'])
 def compra(passagem: str):
@@ -34,7 +40,7 @@ def compra(passagem: str):
 
 def mostrarRotasA(origem, destino)->dict:
     empresaA = EmpresaA()
-    return json.dumps(empresaA.buscarRotas(origem, destino), ensure_ascii=False)
+    return empresaA.buscarRotas(origem, destino)
 
 def comprar(passagem):
     empresaA = EmpresaA()

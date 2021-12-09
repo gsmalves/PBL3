@@ -6,15 +6,17 @@
             <tr>
                 <th>Rota</th>
                 <th>Tempo</th>
-                <th>Passagens</th>
+                <th>Voos</th>
+                <th></th>
             <tr>
         </thead>
         <tbody>
             {% for p in value %}
             <tr>
-                {% for cidade in p.rota %}
-                <td>teste</td>
-                {% endfor %}
+                <td>{{p.rota}}</td>
+                <td>{{p.tempo}} h</td>
+                <td>{{p.info}}</td>
+                <td><button type="button" class="btn btn-primary">Comprar</button></td>
             </tr>
             {% endfor %}
         </tbody>
