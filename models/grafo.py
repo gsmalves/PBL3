@@ -1,7 +1,6 @@
 G = {
     'Belém': [{'cidade': 'Salvador', 'tempo': 4, 'empresa': 'C', 'numero': 1992, 'bilhetes': 10},
-              {'cidade': 'Porto Alegre', 'tempo': 3,
-               'empresa': 'B', 'numero': 1993, 'bilhetes': 10},
+              {'cidade': 'Recife', 'tempo': 3, 'empresa': 'B', 'numero': 1993, 'bilhetes': 10},
               {'cidade': 'Brasília', 'tempo': 2, 'empresa': 'A', 'numero': 1993, 'bilhetes': 10}],
     'São Paulo': [{'cidade': 'Belém', 'tempo': 5, 'empresa': 'B', 'numero': 1979, 'bilhetes': 10},
                   {'cidade': 'Porto Alegre', 'tempo': 3,
@@ -20,6 +19,7 @@ G = {
     'Recife': [{'cidade': 'Salvador', 'tempo': 2, 'empresa': 'C', 'numero': 1999, 'bilhetes': 10},
                {'cidade': 'Rio de Janeiro', 'tempo': 4, 'empresa': 'C', 'numero': 1980, 'bilhetes': 10}],
     'Salvador': [{'cidade': 'Belém', 'tempo': 1, 'empresa': 'A', 'numero': 1990, 'bilhetes': 10},
-                 {'cidade': 'Porto Alegre', 'tempo': 2, 'empresa': 'B', 'numero': 1991, 'bilhetes': 1}],
+                 {'cidade': 'São Paulo', 'tempo': 2, 'empresa': 'B', 'numero': 1991, 'bilhetes': 1}],
     'Rio de Janeiro': [{'cidade': 'São Paulo', 'tempo': 1, 'empresa': 'C', 'numero': 1986, 'bilhetes': 10},
-                       {'cidade': 'Recife', 'tempo': 4, 'empresa': 'A', 'numero': 1981, 'bilhetes': 10}]}
+                        {'cidade': 'Salvador', 'tempo': 3, 'empresa': 'B', 'numero': 1578, 'bilhetes': 10},
+                       {'cidade': 'Recife', 'tempo': 4, 'empresa': 'A', 'numero': 1578, 'bilhetes': 10}]}

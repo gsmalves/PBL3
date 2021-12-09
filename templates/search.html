@@ -6,15 +6,18 @@
             <tr>
                 <th>Rota</th>
                 <th>Tempo</th>
-                <th>Passagens</th>
+                <th>Voos</th>
+                <th></th>
             <tr>
         </thead>
         <tbody>
             {% for p in value %}
-
-                <td>{{p['cidade']}}</td> 
-                <td>{{p['empresa']}}</td> 
-                 
+            <tr>
+                <td>{{p.rota}}</td>
+                <td>{{p.tempo}} h</td>
+                <td>{{p.info}}</td>
+                <td><button type="button" class="btn btn-primary">Comprar</button></td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
