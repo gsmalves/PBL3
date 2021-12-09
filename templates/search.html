@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rota</th>
+                <th>Tempo</th>
+                <th>Passagens</th>
+            <tr>
+        </thead>
+        <tbody>
+            {% for p in value %}
+
+                <td>{{p['cidade']}}</td> 
+                <td>{{p['empresa']}}</td> 
+                 
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

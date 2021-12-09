@@ -17,13 +17,20 @@ def login():
 
 @app.route('/empresaA', methods=['GET', 'POST'])
 def raiz():
+    lista = [{'cidade': 'Salvador', 'tempo': 4, 'empresa': 'C', 'numero': 1992, 'bilhetes': 10},
+              {'cidade': 'Porto Alegre', 'tempo': 3,
+               'empresa': 'B', 'numero': 1993, 'bilhetes': 10},
+              {'cidade': 'Brasília', 'tempo': 2, 'empresa': 'A', 'numero': 1993, 'bilhetes': 10}]
     if request.method == 'GET':
         return render_template('home.html')
     else:
         origem = request.form['origem']
         destino = request.form['destino']
         ret = mostrarRotasA(origem, destino)
-        return jsonify(json.loads(ret)), 200
+        for x in ret:
+            print (x)
+        
+        return render_template('search.html', value = lista, response=200)
 
 @app.route('/empresaA/<string:passagem>', methods=['POST'])
 def compra(passagem: str):

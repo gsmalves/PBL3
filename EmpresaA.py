@@ -122,13 +122,22 @@ class EmpresaA:
 
     def buscarRotas(self, origem, destino) -> list:
         caminhos = list(dfs.dfs_caminhos(G, origem, destino))
-
+        tempo = 0
+        rotas = []
         for x in caminhos:
-            x.append(self.tempoTotal(x))
-            self.add_infos(x)
+            tempo = self.tempoTotal(x)
+            info = self.add_infos(x)
+            j = self.create_json(x, tempo, info)
+            rotas.append(j)
 
-        caminhos = self.remove(caminhos)
-        return caminhos
+        return rotas
+    
+    def create_json(self, rota, tempo, info) -> dict:
+        return {
+            'rota': rota,
+            'tempo': tempo,
+            'info': info
+        }
     
     def tempoTotal(self, caminhos):
         i = 0
@@ -138,12 +147,12 @@ class EmpresaA:
         return i
 
     def add_infos(self, caminhos):
-        i = ''
+        info = []
         for x in range(len(caminhos) - 2):
             i = self.aux_2(caminhos[x], caminhos[x + 1])
-            caminhos.append(i)
+            info.append(i)
 
-        return i
+        return info
     
     def aux_2(self, ini, fim):
         tempo = ''

@@ -13,8 +13,7 @@ def login():
         name = request.form['name']
         passw = request.form['password']
         return redirect(url_for('raiz'))
-            
-
+        
 @app.route('/empresaB', methods=['GET', 'POST'])
 def raiz():
     if request.method == 'GET':
