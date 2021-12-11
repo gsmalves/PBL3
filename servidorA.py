@@ -18,6 +18,10 @@ def login():
 
 @app.route('/empresaA', methods=['GET', 'POST'])
 def raiz():
+    lista = [{'cidade': 'Salvador', 'tempo': 4, 'empresa': 'C', 'numero': 1992, 'bilhetes': 10},
+              {'cidade': 'Porto Alegre', 'tempo': 3,
+               'empresa': 'B', 'numero': 1993, 'bilhetes': 10},
+              {'cidade': 'Brasília', 'tempo': 2, 'empresa': 'A', 'numero': 1993, 'bilhetes': 10}]
     if request.method == 'GET':
         return render_template('home.html')
     else:
