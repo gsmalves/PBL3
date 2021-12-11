@@ -13,11 +13,14 @@
         <tbody>
             {% for p in value %}
             <tr>
-                <td>{{p.rota}}</td>
-                <td>{{p.tempo}} h</td>
-                <td>{{p.info}}</td>
-                <td><button type="button" class="btn btn-primary">Comprar</button></td>
-            </tr>
+                <form action="/comprar" method="POST">
+                    <td>{{p.rota}}</td>
+                    <td>{{p.tempo}} h</td>
+                    <td>{{p.info}}</td>
+                    <td><button type="submit" name="passagem" value="{{ p }}" class="btn btn-primary">Comprar</button></td>
+                </form>
+                </tr>
+
             {% endfor %}
         </tbody>
     </table>

@@ -48,10 +48,23 @@ class EmpresaB:
         return aux
 
     def aux_3(self, inicio, fim):
-
         for x in G[inicio]:
             if x['cidade'] == fim:
                 x['bilhetes'] = x['bilhetes'] - 1
+    
+    def procura_bilhete(self, numero)->bool:
+        for x in G:
+            for i in G[x]:
+                if i['numero'] == int(numero):
+                    if i['bilhetes'] > 0:
+                        return True
+        return False
+    
+    def compra_bilhete(self, numero):
+        for x in G:
+            for i in G[x]:
+                if i['numero'] == int(numero):
+                    i['bilhetes'] -= 1 
     
     def fazerCompra_bilhete(self, rota, fim):
         try:
@@ -67,7 +80,7 @@ class EmpresaB:
 
 
             for x in self.buscarEmp(rota, fim):
-                if x == 'B':
+                if x == 'A':
                     relogio = self.relogio_lamport()
 
             aux = {'rota': rota,'relogio': relogio}
@@ -81,6 +94,7 @@ class EmpresaB:
         return False
     
     def fazerCompra_bilhete2(self, rota, fim):
+        print(rota)
         if len(self.busca_bilhete_2(rota)) == 0:
             for x in range(len(rota)):
                 if rota[x] == fim:
@@ -121,13 +135,22 @@ class EmpresaB:
 
     def buscarRotas(self, origem, destino) -> list:
         caminhos = list(dfs.dfs_caminhos(G, origem, destino))
-
+        tempo = 0
+        rotas = []
         for x in caminhos:
-            x.append(self.tempoTotal(x))
-            self.add_infos(x)
+            tempo = self.tempoTotal(x)
+            info = self.add_infos(x)
+            j = self.create_json(x, tempo, info)
+            rotas.append(j)
 
-        caminhos = self.remove(caminhos)
-        return caminhos
+        return rotas
+    
+    def create_json(self, rota, tempo, info) -> dict:
+        return {
+            'rota': rota,
+            'tempo': tempo,
+            'info': info
+        }
     
     def tempoTotal(self, caminhos):
         i = 0
@@ -137,12 +160,12 @@ class EmpresaB:
         return i
 
     def add_infos(self, caminhos):
-        i = ''
+        info = []
         for x in range(len(caminhos) - 2):
             i = self.aux_2(caminhos[x], caminhos[x + 1])
-            caminhos.append(i)
+            info.append(i)
 
-        return i
+        return info
     
     def aux_2(self, ini, fim):
         tempo = ''

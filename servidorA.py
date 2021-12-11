@@ -1,9 +1,10 @@
 from EmpresaA import EmpresaA
+import requests
 from flask import Flask, jsonify, render_template, redirect, url_for, session, request
 import json
 
+
 app = Flask(__name__)
-    
 
 @app.route('/empresaA/entrar', methods=['GET', 'POST'])
 def login():
@@ -23,7 +24,6 @@ def raiz():
         origem = request.form['origem']
         destino = request.form['destino']
         ret = mostrarRotasA(origem, destino)
-        rota = ''
         resp = ret
         for x in ret:
             rota = ''
@@ -32,23 +32,55 @@ def raiz():
             x['rota'] = rota
         return render_template('search.html', value = ret, v = resp)
 
-@app.route('/empresaA/<string:passagem>', methods=['POST'])
-def compra(passagem: str):
-    print(passagem)
-    comprar(passagem)
+@app.route('/comprar', methods=['POST'])
+def compra():
+    p = request.form['passagem']
+    p = eval(p)
+    resp = False
+    for i in p['info']:
+        if i[0] == 'A':
+            resp = requests.post(url=f'http://localhost:5000/reserva/empresaA/{i[1:5]}').json()
+        elif i[0] == 'B':
+            resp = requests.post(url=f'http://localhost:5000/reserva/empresaB/{i[1:5]}').json()
+        elif i[0] == 'C':
+            resp = requests.post(url=f'http://localhost:5000/reserva/empresaC/{i[1:5]}').json()
+    if resp == 200:
+        for i in p['info']:
+            requests.post(url=f'http://localhost:5000/comprar/empresaA/{i[1:5]}').json()
+            requests.post(url=f'http://localhost:5000/comprar/empresaB/{i[1:5]}').json()
+            requests.post(url=f'http://localhost:5000/comprar/empresaC/{i[1:5]}').json()
+    else:
+        print("Nao tem passagem")
 
+
+    return render_template('home.html')
+
+
+@app.route('/reserva/empresaA/<string:trecho>', methods=['POST'])
+def reservar(trecho: str):
+    if reserva(trecho) == True:
+        return "200"
+    else:
+        return "404"
+     
+
+@app.route('/comprar/empresaA/<string:trecho>', methods=['POST'])
+def comprar(trecho: str):
+    comprar(trecho)
+    return "200"
 
 def mostrarRotasA(origem, destino)->dict:
     empresaA = EmpresaA()
     return empresaA.buscarRotas(origem, destino)
 
+def reserva(passagem):
+    empresaA = EmpresaA()
+    ret = empresaA.procura_bilhete(passagem)
+    return ret
+
 def comprar(passagem):
     empresaA = EmpresaA()
-    ret = empresaA.fazerCompra_bilhete(passagem, "Porto Alegre")
-    if ret == True:
-        return("Compra Realizada")
-    else:
-        return("Não foi possível relizar a compra")
+    empresaA.compra_bilhete(passagem)
 
 # port = int(os.environ.get("PORT", 5000))
 app.run(debug=True ,host='localhost', port=5000)

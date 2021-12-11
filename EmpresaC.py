@@ -3,7 +3,7 @@ from models.grafo import G
 
 rotas = []
 
-class EmpresaA:
+class EmpresaC:
     def __init__(self):
         self.processos = 3
         self.relogio = [[0] for self.i in range(self.processos)]

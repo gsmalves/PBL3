@@ -1,4 +1,4 @@
-from EmpresaB import EmpresaB
+from EmpresaC import EmpresaC
 import requests
 from flask import Flask, jsonify, render_template, redirect, url_for, session, request
 import json
@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-@app.route('/empresaB/entrar', methods=['GET', 'POST'])
+@app.route('/empresaC/entrar', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('login.html')
@@ -16,14 +16,14 @@ def login():
         return redirect(url_for('raiz'))
             
 
-@app.route('/empresaB', methods=['GET', 'POST'])
+@app.route('/empresaC', methods=['GET', 'POST'])
 def raiz():
     if request.method == 'GET':
         return render_template('home.html')
     else:
         origem = request.form['origem']
         destino = request.form['destino']
-        ret = mostrarRotasB(origem, destino)
+        ret = mostrarRotasC(origem, destino)
         resp = ret
         for x in ret:
             rota = ''
@@ -56,7 +56,7 @@ def compra():
     return render_template('home.html')
 
 
-@app.route('/reserva/empresaB/<string:trecho>', methods=['POST'])
+@app.route('/reserva/empresaC/<string:trecho>', methods=['POST'])
 def reservar(trecho: str):
     if reserva(trecho) == True:
         return "200"
@@ -64,23 +64,23 @@ def reservar(trecho: str):
         return "404"
      
 
-@app.route('/comprar/empresaB/<string:trecho>', methods=['POST'])
+@app.route('/comprar/empresaC/<string:trecho>', methods=['POST'])
 def comprar(trecho: str):
     comprar(trecho)
     return "200"
 
-def mostrarRotasB(origem, destino)->dict:
-    empresaB = EmpresaB()
-    return empresaB.buscarRotas(origem, destino)
+def mostrarRotasC(origem, destino)->dict:
+    empresaC = EmpresaC()
+    return empresaC.buscarRotas(origem, destino)
 
 def reserva(passagem):
-    empresaB = EmpresaB()
-    ret = empresaB.procura_bilhete(passagem)
+    empresaC = EmpresaC()
+    ret = empresaC.procura_bilhete(passagem)
     return ret
 
 def comprar(passagem):
-    empresaB = EmpresaB()
-    empresaB.compra_bilhete(passagem)
+    empresaC = EmpresaC()
+    empresaC.compra_bilhete(passagem)
 
 # port = int(os.environ.get("PORT", 5000))
 app.run(debug=True ,host='localhost', port=5000)
