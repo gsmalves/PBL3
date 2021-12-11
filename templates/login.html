@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de login</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(45deg, rgb(77, 2, 2), rgb(20, 107, 141));
+        }
+        div{
+            background-color: rgba(0, 0, 0, 0.829);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            padding: 80px;
+            border-radius: 15px;
+            color: rgb(247, 233, 233);
+        }
+        input{
+            padding: 15px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+        button{
+            background-color: rgb(9, 37, 65);
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            
+        }
+        button:hover{
+            background-color: rgb(2, 50, 66);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="/empresaA/entrar" method="POST">
+        <h1>Login</h1>
+        <input type="text" name="name"  placeholder="Nome">
+        <br><br>
+        <input type="password" name="password" placeholder="Senha">
+        <br><br>
+        <button type="submit">Enviar</button>
+    </form >
+    </div>
+</body>
+</html>

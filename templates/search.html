@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rota</th>
+                <th>Tempo</th>
+                <th>Voos</th>
+                <th></th>
+            <tr>
+        </thead>
+        <tbody>
+            {% for p in value %}
+            <tr>
+                <form action="/comprar" method="POST">
+                    <td>{{p.rota}}</td>
+                    <td>{{p.tempo}} h</td>
+                    <td>{{p.info}}</td>
+                    <td><button type="submit" name="passagem" value="{{ p }}" class="btn btn-primary">Comprar</button></td>
+                </form>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
