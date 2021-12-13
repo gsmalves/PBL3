@@ -39,6 +39,7 @@ def raiz():
 def compra():
     p = request.form['passagem']
     p = eval(p)
+    print(p)
     resp = False
     for i in p['info']:
         if i[0] == 'A':
