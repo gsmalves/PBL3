@@ -6,6 +6,7 @@
             <tr>
                 <th>Rota</th>
                 <th>Tempo</th>
+                <th>Preços</th>
                 <th>Voos</th>
                 <th></th>
             <tr>
@@ -16,6 +17,7 @@
                 <form action="/comprar" method="POST">
                     <td>{{p.rota}}</td>
                     <td>{{p.tempo}} h</td>
+                    <td> R$ {{p.preco}}</td>
                     <td>{{p.info}}</td>
                     <td><button type="submit" name="passagem" value="{{ p }}" class="btn btn-primary">Comprar</button></td>
                 </form>

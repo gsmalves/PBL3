@@ -139,16 +139,18 @@ class EmpresaC:
         rotas = []
         for x in caminhos:
             tempo = self.tempoTotal(x)
+            preco = self.somaPreco(x)
             info = self.add_infos(x)
             j = self.create_json(x, tempo, info)
             rotas.append(j)
 
         return rotas
     
-    def create_json(self, rota, tempo, info) -> dict:
+    def create_json(self, rota, tempo,preco, info) -> dict:
         return {
             'rota': rota,
             'tempo': tempo,
+            'preco': preco,
             'info': info
         }
     
@@ -182,6 +184,36 @@ class EmpresaC:
                 tempo = x['tempo']
 
         return tempo
+
+    def somaPreco(self, ini, fim):
+        preco = 0
+        for x in G[ini]:
+            if x['cidade'] == fim:
+                preco = x['preco']
+
+        return preco
+
+    def precoTotal(self, caminhos):
+        temp = 0
+        for x in range(len(caminhos) - 1):
+            temp = temp + self.somaPreco(caminhos[x], caminhos[x + 1])
+
+        return temp    
+        
+    def somaPreco(self, ini, fim):
+        preco = 0
+        for x in G[ini]:
+            if x['cidade'] == fim:
+                preco = x['preco']
+
+        return preco
+
+    def precoTotal(self, caminhos):
+        temp = 0
+        for x in range(len(caminhos) - 1):
+            temp = temp + self.somaPreco(caminhos[x], caminhos[x + 1])
+
+        return temp
 
     def remove(self, caminhos):
         aux = self.busca_bilhete(caminhos)
