@@ -186,20 +186,6 @@ class EmpresaC:
 
         return tempo
 
-    def somaPreco(self, ini, fim):
-        preco = 0
-        for x in G[ini]:
-            if x['cidade'] == fim:
-                preco = x['preco']
-
-        return preco
-
-    def precoTotal(self, caminhos):
-        temp = 0
-        for x in range(len(caminhos) - 1):
-            temp = temp + self.somaPreco(caminhos[x], caminhos[x + 1])
-
-        return temp    
         
     def somaPreco(self, ini, fim):
         preco = 0
