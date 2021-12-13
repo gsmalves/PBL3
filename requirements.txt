@@ -6,4 +6,4 @@ requests == 2.26.0
 Jinja2==3.0.1
 MarkupSafe==2.0.1
 Werkzeug==2.0.1
-paho-mqtt==1.5.1
+python-dotenv == 0.19.1
