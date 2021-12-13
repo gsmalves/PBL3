@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/empresaC/entrar', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('login.html')
