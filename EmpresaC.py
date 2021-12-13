@@ -141,7 +141,7 @@ class EmpresaC:
             tempo = self.tempoTotal(x)
             preco = self.somaPreco(x)
             info = self.add_infos(x)
-            j = self.create_json(x, tempo, info)
+            j = self.create_json(x, tempo,preco, info)
             rotas.append(j)
 
         return rotas
