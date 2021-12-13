@@ -147,7 +147,6 @@ class EmpresaC:
             info = self.add_infos(x)
             j = self.create_json(x, tempo,preco, info)
             rotas.append(j)
-
         return rotas
     
     def create_json(self, rota, tempo,preco, info) -> dict:
@@ -167,7 +166,8 @@ class EmpresaC:
 
     def add_infos(self, caminhos):
         info = []
-        for x in range(len(caminhos) - 2):
+        print(caminhos)
+        for x in range(len(caminhos) - 1):
             i = self.aux_2(caminhos[x], caminhos[x + 1])
             info.append(i)
 
