@@ -137,6 +137,7 @@ class EmpresaC:
         caminhos = list(dfs.dfs_caminhos(G, origem, destino))
         tempo = 0
         rotas = []
+        preco = 0
         for x in caminhos:
             tempo = self.tempoTotal(x)
             preco = self.somaPreco(x)
