@@ -1,7 +1,10 @@
 from EmpresaC import EmpresaC
 import requests
-from flask import Flask, jsonify, render_template, redirect, url_for, session, request
+from flask import Flask, render_template, redirect, url_for, request
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -39,16 +42,16 @@ def compra():
     resp = False
     for i in p['info']:
         if i[0] == 'A':
-            resp = requests.post(url=f'http://localhost:5000/reserva/empresaA/{i[1:5]}').json()
+            resp = requests.post(url=f'{os.getenv("airlinesA")}/reserva/empresaA/{i[1:5]}').json()
         elif i[0] == 'B':
-            resp = requests.post(url=f'http://localhost:5000/reserva/empresaB/{i[1:5]}').json()
+            resp = requests.post(url=f'{os.getenv("airlinesB")}/reserva/empresaB/{i[1:5]}').json()
         elif i[0] == 'C':
-            resp = requests.post(url=f'http://localhost:5000/reserva/empresaC/{i[1:5]}').json()
+            resp = requests.post(url=f'{os.getenv("airlinesC")}/reserva/empresaC/{i[1:5]}').json()
     if resp == 200:
         for i in p['info']:
-            requests.post(url=f'http://localhost:5000/comprar/empresaA/{i[1:5]}').json()
-            requests.post(url=f'http://localhost:5000/comprar/empresaB/{i[1:5]}').json()
-            requests.post(url=f'http://localhost:5000/comprar/empresaC/{i[1:5]}').json()
+            requests.post(url=f'{os.getenv("airlinesA")}/comprar/empresaA/{i[1:5]}').json()
+            requests.post(url=f'{os.getenv("airlinesB")}/comprar/empresaB/{i[1:5]}').json()
+            requests.post(url=f'{os.getenv("airlinesC")}/comprar/empresaC/{i[1:5]}').json()
     else:
         print("Nao tem passagem")
 
