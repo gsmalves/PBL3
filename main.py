@@ -70,7 +70,7 @@ def reservar(trecho: str):
 
 @app.route('/comprar/empresaC/<string:trecho>', methods=['POST'])
 def comprar(trecho: str):
-    comprar(trecho)
+    compra_passagem(trecho)
     return "200"
 
 def mostrarRotasC(origem, destino)->dict:
@@ -82,11 +82,11 @@ def reserva(passagem):
     ret = empresaC.procura_bilhete(passagem)
     return ret
 
-def comprar(passagem):
+def compra_passagem(passagem):
     empresaC = EmpresaC()
     empresaC.compra_bilhete(passagem)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
 
-    app.run(debug=True ,host='0.0.0.0', port=port)
+    app.run(debug=True ,host=os.environ.get("dev"), port=port)
