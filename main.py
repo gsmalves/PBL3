@@ -49,7 +49,7 @@ def compra():
             resp = requests.post(url=f'{os.getenv("airlinesB")}/reserva/empresaB/{i[1:5]}').json()
         elif i[0] == 'C':
             resp = requests.post(url=f'{os.getenv("airlinesC")}/reserva/empresaC/{i[1:5]}').json()
-    time.sleep(5)
+    time.sleep(2.5)
     if resp == 200:
         for i in p['info']:
             requests.post(url=f'{os.getenv("airlinesA")}/comprar/empresaA/{i[1:5]}').json()
@@ -90,4 +90,4 @@ def compra(passagem):
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True ,host=os.getenv("prod"), port=port)
+    app.run(debug=True ,host=os.getenv("dev"), port=port)
