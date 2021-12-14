@@ -14,12 +14,12 @@
     <tbody>
         {% for p in value %}
         <tr>
-            <form action="/comprar" method="POST">
+            <form action="/reservar" method="POST">
                 <td>{{p.rota}}</td>
                 <td>{{p.tempo}} h</td>
                 <td> R$ {{p.preco}}</td>
                 <td>{{p.info}}</td>
-                <td><button type="submit" data-toggle="modal" data-target="myModal" name="passagem" value="{{ p }}"
+                <td><button type="submit" data-toggle="modal" data-target="#myModal" name="passagem" value="{{ p }}"
                         class="btn btn-primary">Comprar</button></td>
                 <td>
                     <div id="myModal" class="modal fade" role="dialog">
@@ -28,8 +28,8 @@
                                 <span class="sr-only">Loading...</span>
                             </div>
                         </div>
-
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    </div>
+                    <div class="modal fade" id="comprar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -48,7 +48,7 @@
                             </div>
                             </div>
                         </div>
-                    </div>
+                    
         </tr>
         </td>
         </form>

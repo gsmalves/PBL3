@@ -18,6 +18,10 @@ def login():
         name = request.form['name']
         passw = request.form['password']
         return redirect(url_for('raiz', user=name))
+
+@app.route('/home', methods=['GET'])
+def home():
+    return render_template('home.html')
             
 
 @app.route('/empresaC/<string:user>', methods=['GET'])
@@ -37,7 +41,8 @@ def search():
         x['rota'] = rota
     return render_template('search.html', value = ret)
 
-@app.route('/comprar', methods=['POST'])
+
+@app.route('/reservar', methods=['POST'])
 def compra():
     p = request.form['passagem']
     p = eval(p)
@@ -49,17 +54,18 @@ def compra():
             resp = requests.post(url=f'{os.getenv("airlinesB")}/reserva/empresaB/{i[1:5]}').json()
         elif i[0] == 'C':
             resp = requests.post(url=f'{os.getenv("airlinesC")}/reserva/empresaC/{i[1:5]}').json()
-    time.sleep(2.5)
+    time.sleep(1)
     if resp == 200:
         for i in p['info']:
             requests.post(url=f'{os.getenv("airlinesA")}/comprar/empresaA/{i[1:5]}').json()
             requests.post(url=f'{os.getenv("airlinesB")}/comprar/empresaB/{i[1:5]}').json()
             requests.post(url=f'{os.getenv("airlinesC")}/comprar/empresaC/{i[1:5]}').json()
+            return render_template('confirmacao.html', conf=True, passagem=p)
     else:
-        print("Nao tem passagem")
+        return render_template('confirmacao.html', conf=False, passagem=p)
+    
 
     
-    return render_template('home.html')
 
 
 @app.route('/reserva/empresaC/<string:trecho>', methods=['POST'])
@@ -90,4 +96,5 @@ def compra(passagem):
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True ,host=os.getenv("dev"), port=port)
+
+    app.run(debug=True ,host=os.getenv("prod"), port=port)
