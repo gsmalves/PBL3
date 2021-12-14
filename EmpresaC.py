@@ -64,7 +64,10 @@ class EmpresaC:
         for x in G:
             for i in G[x]:
                 if i['numero'] == int(numero):
-                    i['bilhetes'] -= 1 
+                    i['bilhetes'] -= 1
+                    print(i)
+                    # if i['bilhetes'] == 0:
+                    #     G[x].remove(i['bilhetes'])
     
     def fazerCompra_bilhete(self, rota, fim):
         try:
@@ -140,11 +143,10 @@ class EmpresaC:
         preco = 0
         for x in caminhos:
             tempo = self.tempoTotal(x)
-            preco = self.somaPreco(x)
+            preco = self.precoTotal(x)
             info = self.add_infos(x)
             j = self.create_json(x, tempo,preco, info)
             rotas.append(j)
-
         return rotas
     
     def create_json(self, rota, tempo,preco, info) -> dict:
@@ -164,6 +166,7 @@ class EmpresaC:
 
     def add_infos(self, caminhos):
         info = []
+        print(caminhos)
         for x in range(len(caminhos) - 1):
             i = self.aux_2(caminhos[x], caminhos[x + 1])
             info.append(i)
