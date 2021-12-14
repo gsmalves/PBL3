@@ -1,29 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Rota</th>
-                <th>Tempo</th>
-                <th>Preços</th>
-                <th>Voos</th>
-                <th></th>
-            <tr>
-        </thead>
-        <tbody>
-            {% for p in value %}
-            <tr>
-                <form action="/comprar" method="POST">
-                    <td>{{p.rota}}</td>
-                    <td>{{p.tempo}} h</td>
-                    <td> R$ {{p.preco}}</td>
-                    <td>{{p.info}}</td>
-                    <td><button type="submit" name="passagem" value="{{ p }}" class="btn btn-primary">Comprar</button></td>
-                </form>
-                </tr>
-
-            {% endfor %}
-        </tbody>
-    </table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rota</th>
+            <th>Tempo</th>
+            <th>Preço</th>
+            <th>Voos</th>
+            <th></th>
+        <tr>
+    </thead>
+    <tbody>
+        {% for p in value %}
+        <tr>
+            <form action="/comprar" method="POST">
+                <td>{{p.rota}}</td>
+                <td>{{p.tempo}} h</td>
+                <td> R$ {{p.preco}}</td>
+                <td>{{p.info}}</td>
+                <td><button type="submit" data-toggle="modal" data-target="#myModal" name="passagem" value="{{ p }}"
+                        class="btn btn-primary">Comprar</button></td>
+                <td>
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="circle">
+                            <div class="spinner-border text-primary" text-align="center" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+        </tr>
+        </td>
+        </form>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
