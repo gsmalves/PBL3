@@ -164,7 +164,7 @@ class EmpresaC:
 
     def add_infos(self, caminhos):
         info = []
-        for x in range(len(caminhos) - 2):
+        for x in range(len(caminhos) - 1):
             i = self.aux_2(caminhos[x], caminhos[x + 1])
             info.append(i)
 
