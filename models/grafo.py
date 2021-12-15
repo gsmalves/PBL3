@@ -1,6 +1,6 @@
 G = {
-    'Belém': [{'cidade': 'Salvador', 'tempo': 4, 'empresa': 'C', 'numero': 1992, 'bilhetes': 10, 'preco' : 350},
-              {'cidade': 'Recife', 'tempo': 3, 'empresa': 'B', 'numero': 1993, 'bilhetes': 10,'preco' : 450},
+    'Belém': [{'cidade': 'Salvador', 'tempo': 4, 'empresa': 'C', 'numero': 1992, 'bilhetes': 1, 'preco' : 350},
+              {'cidade': 'Recife', 'tempo': 3, 'empresa': 'B', 'numero': 1993, 'bilhetes': 1,'preco' : 450},
               {'cidade': 'Goiás', 'tempo': 2, 'empresa': 'A', 'numero': 1993, 'bilhetes': 90, 'preco' : 268}],
     'São Paulo': [{'cidade': 'Belém', 'tempo': 5, 'empresa': 'B', 'numero': 1979, 'bilhetes': 10, 'preco' : 500},
                   {'cidade': 'Porto Alegre', 'tempo': 3,

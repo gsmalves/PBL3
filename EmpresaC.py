@@ -63,11 +63,10 @@ class EmpresaC:
     def compra_bilhete(self, numero):
         for x in G:
             for i in G[x]:
-                if i['numero'] == int(numero):
+                if i['numero'] == int(numero) and i['empresa']=='B':
                     i['bilhetes'] -= 1
-                    print(i)
-                    # if i['bilhetes'] == 0:
-                    #     G[x].remove(i['bilhetes'])
+                    if i['bilhetes'] == 0:   
+                        G[x].remove(i)
     
     def fazerCompra_bilhete(self, rota, fim):
         try:
@@ -90,14 +89,12 @@ class EmpresaC:
 
 
             self.compradores.append(aux)
-            print(self.compradores)
 
             return True
 
         return False
     
     def fazerCompra_bilhete2(self, rota, fim):
-        print(rota)
         if len(self.busca_bilhete_2(rota)) == 0:
             for x in range(len(rota)):
                 if rota[x] == fim:
@@ -166,7 +163,6 @@ class EmpresaC:
 
     def add_infos(self, caminhos):
         info = []
-        print(caminhos)
         for x in range(len(caminhos) - 1):
             i = self.aux_2(caminhos[x], caminhos[x + 1])
             info.append(i)

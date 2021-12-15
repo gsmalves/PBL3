@@ -78,7 +78,7 @@ def reservar(trecho: str):
 
 @app.route('/comprar/empresaC/<string:trecho>', methods=['POST'])
 def comprar(trecho: str):
-    compra(trecho)
+    finaliza_compra(trecho)
     return "200"
 
 def mostrarRotasC(origem, destino)->dict:
@@ -90,7 +90,8 @@ def reserva(passagem):
     ret = empresaC.procura_bilhete(passagem)
     return ret
 
-def compra(passagem):
+def finaliza_compra(passagem):
+    print(passagem)
     empresaC = EmpresaC()
     empresaC.compra_bilhete(passagem)
 
