@@ -4,7 +4,6 @@ from bully import Processos, processos
 from flask import Flask, render_template, redirect, url_for, request, flash, Markup
 import  os
 from dotenv import load_dotenv
-from priority_queue import PriorityQueue
 
 
 load_dotenv()
