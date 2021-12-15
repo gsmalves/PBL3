@@ -53,8 +53,7 @@ class EmpresaC:
             for i in G[x]:
                 if i['numero'] == int(numero):
                     return True
-                else:
-                    return False
+        return False
     
     def compra_bilhete(self, numero):
         for x in G:
