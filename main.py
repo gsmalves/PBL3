@@ -57,9 +57,9 @@ def compra():
     time.sleep(1)
     if resp == 200:
         for i in p['info']:
-            requests.post(url=f'{os.getenv("airlinesA")}/comprar/empresaA/{i[1:5]}').json()
-            requests.post(url=f'{os.getenv("airlinesB")}/comprar/empresaB/{i[1:5]}').json()
-            requests.post(url=f'{os.getenv("airlinesC")}/comprar/empresaC/{i[1:5]}').json()
+            requests.post(url=f'{os.getenv("airlinesA")}/comprar/empresaA/{i[0:5]}').json()
+            requests.post(url=f'{os.getenv("airlinesB")}/comprar/empresaB/{i[0:5]}').json()
+            requests.post(url=f'{os.getenv("airlinesC")}/comprar/empresaC/{i[0:5]}').json()
             return render_template('confirmacao.html', conf=True, passagem=p)
     else:
         return render_template('confirmacao.html', conf=False, passagem=p)
