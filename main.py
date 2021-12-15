@@ -73,8 +73,8 @@ def compra():
             requests.post(url=f'{os.getenv("airlinesB")}/comprar/empresaB/{i[0:5]}').json()
             requests.post(url=f'{os.getenv("airlinesC")}/comprar/empresaC/{i[0:5]}').json()
         print(resp[1])
-        p = Processos.get_process_by_id(resp[1])
-        p.desativar()
+        # p = Processos.get_process_by_id(resp[1])
+        # p.desativar()
         return render_template('confirmacao.html', conf=True, passagem=p)
     
 @app.route('/reserva/empresaC/<string:trecho>', methods=['POST'])
@@ -84,7 +84,7 @@ def reservar(trecho: str):
     processos.append(process)
     cont = cont + 1
     process.eleicao()
-    print(processos)
+    print(process.get_id_process())
     if reserva(trecho) == True:
         return  json.dumps(["200", process.get_id_process()])
     else:
