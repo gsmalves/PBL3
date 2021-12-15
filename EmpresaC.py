@@ -47,18 +47,14 @@ class EmpresaC:
 
         return aux
 
-    def aux_3(self, inicio, fim):
-        for x in G[inicio]:
-            if x['cidade'] == fim:
-                x['bilhetes'] = x['bilhetes'] - 1
     
     def procura_bilhete(self, numero)->bool:
         for x in G:
             for i in G[x]:
                 if i['numero'] == int(numero):
-                    if i['bilhetes'] > 0:
-                        return True
-        return False
+                    return True
+                else:
+                    return False
     
     def compra_bilhete(self, numero):
         for x in G:
@@ -138,20 +134,3 @@ class EmpresaC:
 
         return temp
 
-    def remove(self, caminhos):
-        aux = self.busca_bilhete(caminhos)
-        for x in aux:
-            caminhos.remove(x)
-        time.sleep(0.2)
-        return caminhos
-
-    def busca_bilhete(self, caminhos):
-
-        aux = []
-        for x in range(len(caminhos)):
-            for y in range(len(caminhos[x])):
-                    if type(caminhos[x][y]) != int:
-                         if len(caminhos[x][y].split('|')) == 2 and int(caminhos[x][y].split('|')[1]) == 0:
-                            aux.append(caminhos[x])
-
-        return aux

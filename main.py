@@ -60,7 +60,7 @@ def compra():
             requests.post(url=f'{os.getenv("airlinesA")}/comprar/empresaA/{i[0:5]}').json()
             requests.post(url=f'{os.getenv("airlinesB")}/comprar/empresaB/{i[0:5]}').json()
             requests.post(url=f'{os.getenv("airlinesC")}/comprar/empresaC/{i[0:5]}').json()
-            return render_template('confirmacao.html', conf=True, passagem=p)
+        return render_template('confirmacao.html', conf=True, passagem=p)
     else:
         return render_template('confirmacao.html', conf=False, passagem=p)
     
