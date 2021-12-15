@@ -1,14 +1,20 @@
 from EmpresaC import EmpresaC
-import requests, time
+import requests, time, json
+from bully import Processos, processos
 from flask import Flask, render_template, redirect, url_for, request, flash, Markup
 import  os
 from dotenv import load_dotenv
+from priority_queue import PriorityQueue
 
 
 load_dotenv()
 
-resp = []
 app = Flask(__name__)
+port = int(os.environ.get("PORT", 5000))
+host=os.getenv("prod")
+id_coordenador = 0
+cont = 0
+
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -50,35 +56,45 @@ def compra():
     for i in p['info']:
         if i[0] == 'A':
             resp = requests.post(url=f'{os.getenv("airlinesA")}/reserva/empresaA/{i[1:5]}').json()
+            if resp[0] == 404:
+                break
         elif i[0] == 'B':
             resp = requests.post(url=f'{os.getenv("airlinesB")}/reserva/empresaB/{i[1:5]}').json()
+            if resp[0] == 404:
+                break
         elif i[0] == 'C':
             resp = requests.post(url=f'{os.getenv("airlinesC")}/reserva/empresaC/{i[1:5]}').json()
-    time.sleep(1)
-    if resp == 200:
+            if resp[0] == 404:
+                break
+    if resp[0] == 404:
+        return render_template('confirmacao.html', conf=False, passagem=p)
+    else:
         for i in p['info']:
             requests.post(url=f'{os.getenv("airlinesA")}/comprar/empresaA/{i[0:5]}').json()
             requests.post(url=f'{os.getenv("airlinesB")}/comprar/empresaB/{i[0:5]}').json()
             requests.post(url=f'{os.getenv("airlinesC")}/comprar/empresaC/{i[0:5]}').json()
+        print(resp[1])
+        p = Processos.get_process_by_id(resp[1])
+        p.desativar()
         return render_template('confirmacao.html', conf=True, passagem=p)
-    else:
-        return render_template('confirmacao.html', conf=False, passagem=p)
     
-
-    
-
-
 @app.route('/reserva/empresaC/<string:trecho>', methods=['POST'])
 def reservar(trecho: str):
+    global cont
+    process = Processos(id_coordenador, cont)
+    processos.append(process)
+    cont = cont + 1
+    process.eleicao()
+    print(processos)
     if reserva(trecho) == True:
-        return "200"
+        return  json.dumps(["200", process.get_id_process()])
     else:
-        return "404"
+        return json.dumps(["404", process.get_id_process()])
      
 
 @app.route('/comprar/empresaC/<string:trecho>', methods=['POST'])
 def comprar(trecho: str):
-    finaliza_compra(trecho)
+    compra(trecho)
     return "200"
 
 def mostrarRotasC(origem, destino)->dict:
@@ -90,12 +106,9 @@ def reserva(passagem):
     ret = empresaC.procura_bilhete(passagem)
     return ret
 
-def finaliza_compra(passagem):
-    print(passagem)
+def compra(passagem):
     empresaC = EmpresaC()
     empresaC.compra_bilhete(passagem)
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-
-    app.run(debug=True ,host=os.getenv("prod"), port=port)
+    app.run(debug=True ,host=host, port=port)
