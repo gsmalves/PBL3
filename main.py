@@ -98,7 +98,7 @@ def compra():
         return render_template('confirmacao.html', conf=True, passagem=p)
     
     
-@app.route('/reserva/empresaA/<string:trecho>', methods=['POST'])
+@app.route('/reserva/empresaC/<string:trecho>', methods=['POST'])
 def reservar(trecho: str):
     if reserva(trecho) == True:
         return  json.dumps("200")
@@ -106,18 +106,18 @@ def reservar(trecho: str):
         return json.dumps("404")
 
 
-@app.route('/comprar/empresaA/<string:trecho>', methods=['POST'])
+@app.route('/comprar/empresaC/<string:trecho>', methods=['POST'])
 def comprar(trecho: str):
     compra(trecho)
     return "200"
 
-def mostrarRotasA(origem, destino)->dict:
-    empresaA = EmpresaA()
-    return empresaA.buscarRotas(origem, destino)
+def mostrarRotasC(origem, destino)->dict:
+    empresaC = EmpresaC()
+    return empresaC.buscarRotas(origem, destino)
 
 def reserva(passagem):
-    empresaA = EmpresaA()
-    ret = empresaA.procura_bilhete(passagem)
+    empresaC = EmpresaC()
+    ret = empresaC.procura_bilhete(passagem)
     return ret
 
 def compra(passagem):
