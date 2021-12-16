@@ -11,11 +11,10 @@ class Processos():
     def get_id_process(self):
         return self.id_processo
 
-    def get_process_by_id(id):
+    def kill_process_by_id(id):
         for i in processos:
             if i.get_id_process() == id:
-                return i
-        return None
+                i.desativar()
 
     def get_id_coordenador(self):
         return self.id_coordenador
@@ -47,5 +46,5 @@ class Processos():
                 if (self.id_coordenador == i.get_id_process()) and (i.get_active() == False):
                     self.id_coordenador = self.id_processo
                     i.call_all(self.id_processo)
-                    return
+        return self.id_coordenador
                             
