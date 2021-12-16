@@ -14,7 +14,7 @@ class Processos():
     def kill_process_by_id(id):
         for i in processos:
             if i.get_id_process() == id:
-                i.desativar()
+                processos.remove(i)
 
     def get_id_coordenador(self):
         return self.id_coordenador
