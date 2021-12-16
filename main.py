@@ -79,12 +79,13 @@ def compra():
 @app.route('/reserva/empresaC/<string:trecho>', methods=['POST'])
 def reservar(trecho: str):
     global cont
+    global id_coordenador 
     process = Processos(id_coordenador, cont)
     processos.append(process)
     cont = cont + 1
     while True:
-        t = process.eleicao()
-        if t == process.get_id_process():
+        id_coordenador = process.eleicao()
+        if id_coordenador == process.get_id_process():
             break
     if reserva(trecho) == True:
         return  json.dumps(["200", process.get_id_process()])
