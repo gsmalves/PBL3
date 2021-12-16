@@ -1,3 +1,8 @@
+import requests
+import  os
+from dotenv import load_dotenv
+
+load_dotenv()
 processos = []
 class Processos():
     def __init__(self, id_coordenador, id_processo, ativo=True):
@@ -45,6 +50,7 @@ class Processos():
                     break
                 if (self.id_coordenador == i.get_id_process()) and (i.get_active() == False):
                     self.id_coordenador = self.id_processo
-                    i.call_all(self.id_processo)
+                    requests.put(url=f'{os.getenv("airlinesA")}/updateCoordenador/{self.id_coordenador}').json()
+
         return self.id_coordenador
                             
