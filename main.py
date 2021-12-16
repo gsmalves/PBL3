@@ -83,10 +83,9 @@ def reservar(trecho: str):
     process = Processos(id_coordenador, cont)
     processos.append(process)
     cont = cont + 1
-    while True:
+    while id_coordenador != process.get_id_process():
         id_coordenador = process.eleicao()
-        if id_coordenador == process.get_id_process():
-            break
+
     if reserva(trecho) == True:
         return  json.dumps(["200", process.get_id_process()])
     else:
