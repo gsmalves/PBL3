@@ -70,7 +70,7 @@ def search():
         x['rota'] = rota
     return render_template('search.html', value = ret)
 
-
+#Rota que reserva as passagens (verifica se estao disponíveis) e realiza a compra
 @app.route('/reservar', methods=['POST'])
 def compra():
     p = request.form['passagem']
